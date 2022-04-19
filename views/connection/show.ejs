@@ -1,0 +1,41 @@
+<%- include('../partials/header.ejs')  %> 
+
+    <title><%= connection.name %> </title>
+
+    <div id="connection_content">
+
+        <h3><%= connection.name %> </h3>
+
+        <div id="conn_event_info">
+            <img src="<%= connection.imageUrl %> " alt="event_pic">
+            <ul>
+                <li><b>Hosted by: </b><%= connection.hostName %> </li>
+                <li>Date: <%= connection.date %> </li>
+                <li>Start time:<%= connection.startTime %></li>
+                <li>End time: <%= connection.endTime %></li>
+                <li><%= connection.location %> </li>
+                <!-- <li>Room 324</li> -->
+            </ul>
+        </div>
+
+        <h3>Description</h3>
+        <p>
+            <%= connection.details %> 
+        </p>
+        
+    </div>
+
+    <div id="conn_buttons">
+        <form>
+
+            <input type="submit" value="Update" formmethod="GET" formaction="/connections/<%= connection.id %>/edit">
+        
+            <input type="submit" value="Delete" formmethod="POST" formaction="/connections/<%= connection.id 
+            %>?_method=DELETE">
+            
+        </form>
+    </div>
+
+
+
+<%- include('../partials/footer.ejs') %> 

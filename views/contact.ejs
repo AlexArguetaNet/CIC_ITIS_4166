@@ -1,0 +1,45 @@
+<%- include('./partials/header.ejs') %> 
+
+    <title>CSC Contact</title>
+
+    <div id="about_content" class="contentBox">
+
+        <h1><u>Contact Us</u></h1>
+        <p>
+            Have a question? You can reach out to us by sending us an email below, or you can give us a call!
+        </p>
+
+        <div id="phoneInfo">
+            <h3>Phone &#9742;: (709)867-5309</h3>
+            <h3>Address: 123 Fake Street, Charlotte, North Carolina</h3>
+        </div>
+
+    </div>
+
+
+
+
+    <div class="container">
+        <form action="action_page.php">
+    
+        <h2><u>Send us an Email</u></h2>
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+    
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+    
+
+        <label for="email">Email Address</label>
+        <input type="text" id="email" name="email" placeholder="Your email address..">
+    
+        <label for="subject">Subject</label>
+        <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+    
+        <input type="submit" value="Submit">
+    
+        </form>
+    </div>
+
+
+<%- include('./partials/footer.ejs') %> 
