@@ -5,6 +5,10 @@ const methodOverride = require('method-override');
 const connRoutes = require('./routes/connectionRoutes');
 const mainRoutes = require('./routes/mainRoutes');
 const mongoose = require('mongoose');
+const userRoutes = require('./routes/userRoutes');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const flash = require('connect-flash');
 
 // Create app
 const app = express();
@@ -33,11 +37,20 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('tiny'));
 app.use(methodOverride('_method'));
+app.use(session({
+    secret: '123345',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {maxAge: 60*60*1000},
+    store: new MongoStore({mongoUrl: 'mongodb://localhost:27017/NBAD'})
+}));
+app.use(flash());
 
 
 // Set up routes
 app.use('/main', mainRoutes);
 app.use('/connections', connRoutes);
+app.use('/user', userRoutes);
 
 
 // Setting up error page
@@ -64,7 +77,3 @@ app.use((err, req, res, next) => {
 });
 
 
-
-
-
-// TODO: Reformat dates and times.
