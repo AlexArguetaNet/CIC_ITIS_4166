@@ -9,6 +9,7 @@ const userRoutes = require('./routes/userRoutes');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
+const res = require('express/lib/response');
 
 // Create app
 const app = express();
@@ -45,6 +46,13 @@ app.use(session({
     store: new MongoStore({mongoUrl: 'mongodb://localhost:27017/NBAD'})
 }));
 app.use(flash());
+app.use((req, res, next) => {
+    res.locals.user = req.session.user||null;
+    console.log(req.session)
+    res.locals.successMessages = req.flash('success');
+    res.locals.errorMessages = req.flash('error');
+    next();
+});
 
 
 // Set up routes

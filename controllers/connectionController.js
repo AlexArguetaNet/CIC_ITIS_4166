@@ -37,6 +37,9 @@ exports.create = (req, res, next) => {
 
     let connection = new model(req.body); // Create a new connection document
 
+    // Asscociating user to a connections
+    connection.creator = req.session.user;
+
     // Make sure field names in the newConnection.ejs
     // are the same names defined in the model schema
     console.log(req.body);
@@ -46,7 +49,9 @@ exports.create = (req, res, next) => {
         res.redirect('/connections');
 
         // Keep track of categories
-        model.addCategory(connection.topic);
+        // model.addCategory(connection.topic);
+
+        console.log(connection);
 
 
     })

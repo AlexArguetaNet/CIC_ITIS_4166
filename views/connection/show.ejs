@@ -26,6 +26,8 @@
     </div>
 
     <div id="conn_buttons">
+
+        <% if (user == connection.creator._id) { %>
         <form>
 
             <input type="submit" value="Update" formmethod="GET" formaction="/connections/<%= connection.id %>/edit">
@@ -34,6 +36,9 @@
             %>?_method=DELETE">
             
         </form>
+        <% } %>
+
+
     </div>
 
 

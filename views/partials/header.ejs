@@ -22,6 +22,7 @@
                     <li><a href="/user/login">Login</a></li>
                     <li><a href="/user/signup">Sign up</a></li>
                     <li><a href="/user/profile">Profile</a></li>
+                    <li><a href="/user/logout">Logout</a></li>
                 </ul>
 
             </div>
@@ -37,5 +38,19 @@
         </div>
 
     </div>
+
+    <!-- Display flash messages -->
+    <% if (errorMessages.length > 0) {
+        errorMessages.forEach(message => { %>
+            <div class="error"> <%= message %> </div>
+       <% });
+    } %>
+    
+    
+    <% if (successMessages.length > 0) {
+        successMessages.forEach(message => { %>
+            <div class="success"> <%= message %> </div>
+       <% });
+    } %>
 
     <main>
