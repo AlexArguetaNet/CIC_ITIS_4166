@@ -18,11 +18,15 @@
             <div id="user_nav_bar">
 
                 <ul>
-                    <li><a href="/connections/newConnection">Start a new connection</a></li>
-                    <li><a href="/user/login">Login</a></li>
-                    <li><a href="/user/signup">Sign up</a></li>
-                    <li><a href="/user/profile">Profile</a></li>
-                    <li><a href="/user/logout">Logout</a></li>
+                    <% if (!user) { %>
+                        <li><a href="/user/login">Login</a></li>
+                        <li><a href="/user/signup">Sign up</a></li>
+                    <% } else { %>
+                        <li><a href="/connections/newConnection">Start a new connection</a></li>
+                        <li><a href="/user/profile">Profile</a></li>
+                        <li><a href="/user/logout">Logout</a></li>
+                    <% } %>
+                    
                 </ul>
 
             </div>
