@@ -38,6 +38,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('tiny'));
 app.use(methodOverride('_method'));
+app.use(flash());
 app.use(session({
     secret: '123345',
     resave: false,
@@ -45,7 +46,7 @@ app.use(session({
     cookie: {maxAge: 60*60*1000},
     store: new MongoStore({mongoUrl: 'mongodb://localhost:27017/NBAD'})
 }));
-app.use(flash());
+
 app.use((req, res, next) => {
     res.locals.user = req.session.user||null;
     console.log(req.session)
@@ -55,10 +56,12 @@ app.use((req, res, next) => {
 });
 
 
+
+
 // Set up routes
 app.use('/main', mainRoutes);
 app.use('/connections', connRoutes);
-app.use('/user', userRoutes);
+app.use('/users', userRoutes);
 
 
 // Setting up error page

@@ -6,7 +6,7 @@ const { urlencoded } = require('express');
 
 // Get: get the sign up form
 exports.signup = (req, res) => {
-    res.render('./user/signup');
+    res.render('./users/signup');
 };
 
 // POST: create a new user
@@ -15,16 +15,19 @@ exports.createUser = (req, res) => {
     let user = new User(req.body);
 
     user.save()
-    .then(() => res.redirect('/user/login'))
+    .then(() => {
+        req.flash('success', 'You have successfully signed up!');
+        res.redirect('/users/login')
+    })
     .catch(err => {
         if (err.name === 'ValidationError') {
             req.flash('error', err.message);
-            return res.redirect('/user/signup');
+            return res.redirect('/users/signup');
         }
 
         if (err.code === 11000) {
             req.flash('error', 'Email address has been used!');
-            return res.redirect('/user/signup');
+            return res.redirect('/users/signup');
         }
     });
 
@@ -36,7 +39,7 @@ exports.createUser = (req, res) => {
 
 // Get: get the login form
 exports.login = (req, res) => {
-    res.render('./user/login');
+    res.render('./users/login');
 }
 
 // POST: process login request
@@ -57,17 +60,17 @@ exports.processLogin = ('/login', (req, res) => {
                 if (result) {
                     req.session.user = user._id; // store user's id in the session
                     req.flash('success', 'You have successfully logged in');
-                    res.redirect('/user/profile');
+                    res.redirect('/users/profile');
                 } else {
                     req.flash('error', 'Wrong password!');
-                    res.redirect('/user/login');
+                    res.redirect('/users/login');
                 }
             });
             
 
         } else {
             req.flash('error', 'Wrong email address!');
-            res.redirect('/user/login');
+            res.redirect('/users/login');
         }
     })
     .catch(err => next(err));
@@ -81,13 +84,13 @@ exports.processLogin = ('/login', (req, res) => {
 exports.profile = (req, res) => {
 
     let id = req.session.user;
-    Promise.all([User.findById(id), Connection.find({creator: id})])
+    Promise.all([User.findById(id), Connection.find({hostName: id})])
     .then(results => {
         const [user, connections] = results;
         
         console.log(user);
 
-        res.render('./user/profile', {user, connections})
+        res.render('./users/profile', {user, connections})
     })
     .catch(err => next(err));
 }

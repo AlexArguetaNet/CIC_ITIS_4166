@@ -19,10 +19,7 @@
                         <td><label for="title"><b>Title:</b></label></td>
                         <td><input name="title" type="text" class="text_input" placeholder="title" value="<%= connection.title %>" required></td>
                     </tr>
-                    <tr>
-                        <td><label for="hostName"><b>Host:</b></label></td>
-                        <td><input name="hostName" type="text" class="text_input" placeholder="host" value="<%= connection.hostName %>" required></td>
-                    </tr>
+
                     <tr>
                         <td><label for="details"><b>Details:</b></label></td>
                         <td><textarea name="details" placeholder="details" required><%= connection.details %></textarea></td>
@@ -51,7 +48,7 @@
                 </table>
 
                 <div id="submit_button">
-                    <input type="submit">
+                    <input type="submit" value="Submit">
                 </div>
                 
 

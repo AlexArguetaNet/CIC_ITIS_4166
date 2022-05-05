@@ -9,7 +9,7 @@
         <div id="conn_event_info">
             <img src="<%= connection.imageUrl %> " alt="event_pic">
             <ul>
-                <li><b>Hosted by: </b><%= connection.hostName %> </li>
+                <li><b>Hosted by: </b><%= connection.hostName.firstName + ' ' + connection.hostName.lastName %> </li>
                 <li>Date: <%= connection.date %> </li>
                 <li>Start time:<%= connection.startTime %></li>
                 <li>End time: <%= connection.endTime %></li>
@@ -27,7 +27,7 @@
 
     <div id="conn_buttons">
 
-        <% if (user == connection.creator._id) { %>
+        <% if (user == connection.hostName._id) { %>
         <form>
 
             <input type="submit" value="Update" formmethod="GET" formaction="/connections/<%= connection.id %>/edit">

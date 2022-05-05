@@ -62,6 +62,7 @@ a {
     padding-right: 20px;
 }
 #general_nav_bar {
+    
     position: relative;
     bottom: 2px;
     border-top: 2px solid rgb(62, 162, 255);
@@ -301,4 +302,37 @@ input[type=text], input[type=email], input[type=password], select, textarea {
 .imageRow img{
     width: 300px;
     padding: 20px;
+}
+
+
+/* flash messages */
+.error {
+    background-color: rgb(255, 126, 126);
+    text-align: center;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    margin-top: -20px;
+    width: 60%;
+    border-radius: 10px;
+}
+
+.success {
+    background-color: rgb(92, 249, 171);
+    text-align: center;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    margin-top: -20px;
+    width: 60%;
+    border-radius: 10px;
+}
+
+
+#userName {
+    margin-left: 90%;
+    position: relative;
+    bottom: 55px;
 }

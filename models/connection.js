@@ -12,9 +12,8 @@ const connectionSchema = new Schema({
     date: {type: String, required: [true, 'date is required']},
     startTime: {type: String, required: [true, 'start time is required']},
     endTime: {type: String, required: [true, 'end time is required']},
-    hostName: {type: String, required: [true, 'host name is required']},
+    hostName: {type: Schema.Types.ObjectId, ref:'User'},
     imageUrl: {type: String, required: [true, 'image is required']},
-    creator: {type: Schema.Types.ObjectId, ref:'User'}
 
 },
 {timestamps: true}

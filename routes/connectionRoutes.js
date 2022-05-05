@@ -11,7 +11,7 @@ router.get('/', connController.index);
 router.get('/newConnection', isLoggedIn, connController.new);
 
 // POST /connections: Send newly created connection
-router.post('/', connController.create);
+router.post('/', isLoggedIn, connController.create);
 
 // GET /stories/:id: Send details of connection identified by id
 router.get('/:id', validateId,connController.show);

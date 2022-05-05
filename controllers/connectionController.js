@@ -1,4 +1,5 @@
 const model = require('../models/connection');
+const flash = require('connect-flash');
 
 
 // Get /connections: Send all connections to the user
@@ -38,7 +39,7 @@ exports.create = (req, res, next) => {
     let connection = new model(req.body); // Create a new connection document
 
     // Asscociating user to a connections
-    connection.creator = req.session.user;
+    connection.hostName = req.session.user;
 
     // Make sure field names in the newConnection.ejs
     // are the same names defined in the model schema
@@ -46,6 +47,9 @@ exports.create = (req, res, next) => {
 
     connection.save()
     .then((connection)=> {
+
+        
+        req.flash('success', 'Connection successfully created');
         res.redirect('/connections');
 
         // Keep track of categories
@@ -77,7 +81,8 @@ exports.show = (req, res, next) => {
         return next(err);
     }
 
-    model.findById(id)
+
+    model.findById(id).populate('hostName', 'firstName lastName')
     .then(connection => {
         if (connection) {
             return res.render('./connection/show', {connection});
@@ -98,7 +103,7 @@ exports.edit = (req, res, next) => {
     let id = req.params.id;
     
     if (! id.match(/^[0-9a-fA-F]{24}$/)) {
-        let err = new Error('Invalid story id');
+        let err = new Error('Invalid connection id');
         err.status = 400;
         return next(err);
     }
@@ -127,7 +132,7 @@ exports.update = (req, res, next) => {
     let id = req.params.id;
 
     if (! id.match(/^[0-9a-fA-F]{24}$/)) {
-        let err = new Error('Invalid story id');
+        let err = new Error('Invalid connection id');
         err.status = 400;
         return next(err);
     }
@@ -160,7 +165,7 @@ exports.delete = (req, res, next) => {
     let id = req.params.id;
 
     if (! id.match(/^[0-9a-fA-F]{24}$/)) {
-        let err = new Error('Invalid story id');
+        let err = new Error('Invalid connection id');
         err.status = 400;
         return next(err);
     }
